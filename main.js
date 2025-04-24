@@ -1,0 +1,1 @@
+document.getElementById('app').innerText = 'Hier erscheint bald dein interaktives Font Matcher Tool mit Filterfunktion.';
