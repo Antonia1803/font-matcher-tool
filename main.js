@@ -1,4 +1,29 @@
+fetch('https://www.googleapis.com/webfonts/v1/webfonts?key=YOUR_GOOGLE_API_KEY')
+  .then(response => response.json())
+  .then(data => {
+    const fonts = data.items.map(item => item.family);
 
+    WebFont.load({
+      google: {
+        families: fonts
+      },
+      active: function() {
+        console.log('Alle Google Fonts sind jetzt geladen!');
+        initializeApp();
+      },
+      inactive: function() {
+        console.log('Fehler beim Laden der Google Fonts!');
+      }
+    });
+  })
+  .catch(error => {
+    console.log('Fehler beim Abrufen der Google Fonts:', error);
+  });
+
+function initializeApp() {
+  console.log("Font Matcher Tool ist jetzt bereit!");
+  document.getElementById("root").innerHTML = "Das Font Matcher Tool ist bereit!";
+}
 import { createElement as h, useState, useEffect } from "https://esm.sh/react";
 import { render } from "https://esm.sh/react-dom";
 import fontData from "./fontData.js";
