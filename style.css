@@ -1,15 +1,12 @@
 
 body {
   font-family: sans-serif;
+  background: #f9fafb;
+  margin: 0;
   padding: 2rem;
-  background: #f9f9f9;
-  color: #333;
 }
-.container {
-  max-width: 700px;
-  margin: auto;
-}
-select {
+select, input {
+  font-size: 1rem;
   padding: 0.5rem;
-  margin: 1rem 0.5rem 0 0;
+  margin-bottom: 1rem;
 }
