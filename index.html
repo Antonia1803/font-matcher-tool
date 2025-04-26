@@ -9,8 +9,30 @@
   <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
 </head>
 <body>
-  <div id="root"></div>
-  <script src="fontData.js"></script>
+  <div id="root">
+    <h1 id="headline">Deine Headline</h1>
+    <p id="subline">Deine Subline oder Bodytext erscheint hier</p>
+
+    <div class="controls">
+      <input id="headlineInput" type="text" placeholder="Headline-Text ändern" />
+      <input id="sublineInput" type="text" placeholder="Subline-Text ändern" />
+
+      <select id="propertyFilter" multiple>
+        <option value="freundlich">freundlich</option>
+        <option value="puristisch">puristisch</option>
+        <option value="nachhaltig">nachhaltig</option>
+        <option value="öko">öko</option>
+        <option value="familienfreundlich">familienfreundlich</option>
+        <option value="natürlich">natürlich</option>
+        <option value="einfach">einfach</option>
+        <option value="ehrlich">ehrlich</option>
+        <option value="innovativ">innovativ</option>
+        <option value="lecker">lecker</option>
+      </select>
+
+      <select id="fontSelector"></select>
+    </div>
+  </div>
   <script type="module" src="main.js"></script>
 </body>
 </html>
