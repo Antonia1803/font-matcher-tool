@@ -1,38 +1,84 @@
-
-<!DOCTYPE html>
-<html lang="de">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Font Matcher Tool</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2487.2">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+  </style>
 </head>
 <body>
-  <div id="root">
-    <h1 id="headline">Deine Headline</h1>
-    <p id="subline">Deine Subline oder Bodytext erscheint hier</p>
-
-    <div class="controls">
-      <input id="headlineInput" type="text" placeholder="Headline-Text ändern" />
-      <input id="sublineInput" type="text" placeholder="Subline-Text ändern" />
-
-      <select id="propertyFilter" multiple>
-        <option value="freundlich">freundlich</option>
-        <option value="puristisch">puristisch</option>
-        <option value="nachhaltig">nachhaltig</option>
-        <option value="öko">öko</option>
-        <option value="familienfreundlich">familienfreundlich</option>
-        <option value="natürlich">natürlich</option>
-        <option value="einfach">einfach</option>
-        <option value="ehrlich">ehrlich</option>
-        <option value="innovativ">innovativ</option>
-        <option value="lecker">lecker</option>
-      </select>
-
-      <select id="fontSelector"></select>
-    </div>
-  </div>
-  <script type="module" src="main.js"></script>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="de"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Font Matcher Tool&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;link rel="stylesheet" href="style.css" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div class="container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Font Matcher Tool&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="input-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;label for="headline-text"&gt;Logo Text / Headline&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;input type="text" id="headline-text" placeholder="Gib deinen Text hier ein" /&gt;</p>
+<p class="p2"><span class="Apple-converted-space">      </span></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;form id="filter-form"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Eigenschaften auswählen (max. 5):&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="properties"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;!-- Checkboxes für Eigenschaften --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Zeitlos"&gt; Zeitlos&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Modern"&gt; Modern&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Vertrauenswürdig"&gt; Vertrauenswürdig&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Innovativ"&gt; Innovativ&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Natürlich"&gt; Natürlich&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Freundlich"&gt; Freundlich&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Minimalistisch"&gt; Minimalistisch&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Verspielt"&gt; Verspielt&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Dynamisch"&gt; Dynamisch&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Bodenständig"&gt; Bodenständig&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Hochwertig"&gt; Hochwertig&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Ehrlich"&gt; Ehrlich&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Kreativ"&gt; Kreativ&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Selbstbewusst"&gt; Selbstbewusst&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Reduziert"&gt; Reduziert&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Charakterstark"&gt; Charakterstark&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Elegant"&gt; Elegant&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Nachhaltig"&gt; Nachhaltig&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Inspirierend"&gt; Inspirierend&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Mutig"&gt; Mutig&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Ruhig"&gt; Ruhig&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Erfrischend"&gt; Erfrischend&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Klar"&gt; Klar&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Energiegeladen"&gt; Energiegeladen&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;label&gt;&lt;input type="checkbox" name="property" value="Verlässlich"&gt; Verlässlich&lt;/label&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;button type="submit"&gt;Filter anwenden&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/form&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="font-select"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h3&gt;Ausgewählte Schriftart:&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;select id="font-select"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>&lt;!-- Die Schriftarten werden hier dynamisch geladen --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/select&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="output-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Vorschau:&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div id="text" class="text-preview"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>Dein Text hier</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script src="main.js"&gt;&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
 </body>
 </html>
