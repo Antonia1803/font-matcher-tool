@@ -1,84 +1,65 @@
+const API_KEY = "AIzaSyAsYiOrdnXJe_-D6GhXzbJNbXO6jDcqft8";
+const MAX_SELECTION = 4;
+const traits = [
+    "Zeitlos", "Modern", "Vertrauenswürdig", "Innovativ", "Natürlich", "Freundlich", "Minimalistisch", "Verspielt",
+    "Dynamisch", "Bodenständig", "Hochwertig", "Ehrlich", "Kreativ", "Selbstbewusst", "Reduziert", "Charakterstark",
+    "Elegant", "Nachhaltig", "Inspirierend", "Mutig", "Ruhig", "Erfrischend", "Klar", "Energiegeladen", "Verlässlich"
+];
 
-const GOOGLE_API_KEY = 'AIzaSyAsYiOrdnXJe_-D6GhXzbJNbXO6jDcqft8'; // Hier deinen API-Schlüssel einfügen
+// Loader
+window.addEventListener('load', () => {
+    document.getElementById('loader').classList.add('hidden');
+    document.getElementById('app').classList.remove('hidden');
+});
 
-// Google Fonts API URL
-const API_URL = `https://www.googleapis.com/webfonts/v1/webfonts?key=${GOOGLE_API_KEY}`;
+// Erstelle Checkboxen
+const checkboxesDiv = document.querySelector('.checkboxes');
+traits.forEach(trait => {
+    const label = document.createElement('label');
+    label.innerHTML = `<input type="checkbox" value="${trait}"> ${trait}`;
+    checkboxesDiv.appendChild(label);
+});
 
-// Funktion, um alle verfügbaren Google Fonts abzurufen
+// Eventlistener für Button
+document.getElementById('findFontsBtn').addEventListener('click', async () => {
+    const selectedTraits = Array.from(document.querySelectorAll('.checkboxes input:checked')).map(cb => cb.value);
+    if (selectedTraits.length > MAX_SELECTION) {
+        alert("Bitte wähle maximal 4 Eigenschaften aus.");
+        return;
+    }
+    const headline = document.getElementById('headlineInput').value;
+    if (!headline) {
+        alert("Bitte gib eine Headline oder einen Logonamen ein.");
+        return;
+    }
+    const fonts = await fetchGoogleFonts();
+    displayFontSuggestions(fonts.items.slice(0, 10), headline); // Testweise erste 10 Fonts
+});
+
+// Google Fonts API abrufen
 async function fetchGoogleFonts() {
-  try {
-    const response = await fetch(API_URL);
-    const data = await response.json();
-    return data.items; // Gibt die Liste der Schriftarten zurück
-  } catch (error) {
-    console.error('Fehler beim Abrufen der Google Fonts:', error);
-  }
+    const response = await fetch(`https://www.googleapis.com/webfonts/v1/webfonts?key=${API_KEY}`);
+    return await response.json();
 }
 
-// Funktion, um die Google Fonts dynamisch zu laden
-async function loadFonts() {
-  const fonts = await fetchGoogleFonts();
-
-  if (fonts) {
-    const fontSelect = document.getElementById("font-select");
-
+// Fonts anzeigen
+function displayFontSuggestions(fonts, text) {
+    const fontDiv = document.getElementById('fontSuggestions');
+    fontDiv.innerHTML = "";
     fonts.forEach(font => {
-      const option = document.createElement("option");
-      option.value = font.family;
-      option.textContent = font.family;
-      fontSelect.appendChild(option);
+        const fontLink = document.createElement('link');
+        fontLink.href = `https://fonts.googleapis.com/css2?family=${font.family.replace(/ /g, '+')}&display=swap`;
+        fontLink.rel = 'stylesheet';
+        document.head.appendChild(fontLink);
+
+        const div = document.createElement('div');
+        div.classList.add('font-preview');
+        div.style.fontFamily = `'${font.family}', sans-serif`;
+        div.innerHTML = `<strong>${font.family}:</strong><br><span style="font-size:2rem">${text}</span>`;
+        fontDiv.appendChild(div);
     });
-  }
+
+    document.getElementById('sublineSection').classList.remove('hidden');
 }
 
-// Funktion zur Filterung der Schriften basierend auf den Eigenschaften
-function filterFontsByProperties(fonts, selectedProperties) {
-  return fonts.filter(font => {
-    return selectedProperties.some(property => font.tags && font.tags.includes(property));
-  });
-}
-
-// Beispiel für das Anwenden der ausgewählten Schriftart auf ein Textfeld
-function applyFont(fontFamily) {
-  const textElement = document.getElementById("text");
-  textElement.style.fontFamily = fontFamily;
-}
-
-// Funktion, um die Schriften entsprechend der ausgewählten Eigenschaften anzuzeigen
-function applyFilteredFonts(selectedProperties) {
-  fetchGoogleFonts().then(fonts => {
-    const filteredFonts = filterFontsByProperties(fonts, selectedProperties);
-    const fontSelect = document.getElementById("font-select");
-    fontSelect.innerHTML = ""; // Zurücksetzen der Optionen im Dropdown-Menü
-
-    filteredFonts.forEach(font => {
-      const option = document.createElement("option");
-      option.value = font.family;
-      option.textContent = font.family;
-      fontSelect.appendChild(option);
-    });
-  });
-}
-
-// Event Listener, um Schriftart zu ändern, wenn der Benutzer eine auswählt
-document.getElementById("font-select").addEventListener("change", (event) => {
-  const selectedFont = event.target.value;
-  applyFont(selectedFont);
-});
-
-// Event Listener für die Filterung nach Eigenschaften (Mehrfachauswahl)
-document.getElementById("filter-form").addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const selectedProperties = Array.from(document.querySelectorAll("input[name='property']:checked"))
-    .map(input => input.value);
-
-  applyFilteredFonts(selectedProperties);
-});
-
-// Initialisieren des Tools
-function init() {
-  loadFonts(); // Lädt die Schriften
-}
-
-init();
+// Hier könnte noch Subline Auswahl implementiert werden
