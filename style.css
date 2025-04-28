@@ -1,70 +1,62 @@
-/* Grundlegendes Layout */
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
+/* Basis-Reset */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-h1, h2, h3 {
-  text-align: center;
+body {
+  font-family: 'Lato', sans-serif;
+  line-height: 1.6;
+  padding: 2rem;
   color: #333;
 }
 
-/* Eingabebereich */
-.input-section {
-  background-color: #fff;
-  padding: 20px;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Font-Karten */
+.font-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.font-card {
+  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  margin-bottom: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
 }
 
-.input-section label {
-  display: block;
-  margin-bottom: 10px;
-  font-weight: bold;
-}
-
-#headline-text {
-  width: 100%;
-  padding: 10px;
-  font-size: 1.2em;
-  margin-bottom: 20px;
-  border: 1px solid #ccc;
+.font-preview {
+  font-size: 1.5rem;
+  line-height: 1.6;
+  padding: 1rem;
+  background: #f8f9fa;
   border-radius: 4px;
+  min-height: 120px;
 }
 
-/* Eigenschaften-Checkboxen */
-.properties {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-bottom: 20px;
+.font-explanation h3 {
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
 }
 
-.properties label {
-  background-color: #eaeaea;
-  padding: 8px 12px;
-  border-radius: 4px;
-  cursor: pointer;
+.font-explanation ul {
+  padding-left: 1.2rem;
+  margin-top: 0.5rem;
+  color: #555;
 }
 
-.properties input {
-  margin-right: 5px;
+@media (max-width: 768px) {
+  .font-card {
+    grid-template-columns: 1fr;
+  }
 }
-
-/* Buttons */
-button {
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  border
-::contentReference[oaicite:0]{index=0}
- 
