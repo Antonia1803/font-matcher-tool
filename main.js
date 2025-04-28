@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
-  // Beispiel-Daten: Schriftarten mit zugehörigen Eigenschaften und Beschreibungen
+document.addEventListener("DOMContentLoaded", function () {
   const fonts = [
     {
       name: "Roboto",
