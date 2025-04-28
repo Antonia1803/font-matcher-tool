@@ -10,18 +10,25 @@
   <div class="container">
     <h1>Font Finder</h1>
     <input type="text" id="headlineInput" placeholder="Gib deine Headline ein...">
-    
+
     <div id="attributes" class="attributes">
-      <!-- Eigenschaften-Checkboxen -->
+      <!-- Checkboxen für Eigenschaften -->
     </div>
 
     <div id="fontGrid" class="font-grid">
-      <!-- Fonts werden hier angezeigt -->
+      <!-- Fonts werden hier geladen -->
     </div>
 
     <button id="loadMoreBtn">Weitere anzeigen</button>
 
     <div id="loader" class="loader hidden"></div>
+
+    <div id="fontDetails" class="font-details hidden">
+      <h2 id="selectedFontName"></h2>
+      <div id="variantButtons"></div>
+      <button id="closeDetailsBtn">Zurück zur Auswahl</button>
+    </div>
+
   </div>
 
   <script src="main.js"></script>
