@@ -1,33 +1,30 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Font Finder</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Font Finder</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="main.js"></script>
 </head>
 <body>
-  <div class="container">
-    <h1>Font Finder Tool</h1>
-    <input type="text" id="headlineInput" placeholder="Headline oder Logoname" />
-    <div id="fontOptions">
-      <label for="fontSelect">Wählen Sie eine Schriftart für die Headline:</label>
-      <select id="fontSelect">
-        <!-- Google Fonts Optionen werden hier dynamisch eingefügt -->
-      </select>
+    <div id="loader" class="loader">Lade Fonts...</div>
+    <div id="app" class="hidden">
+        <h1>Font Finder</h1>
+        <input type="text" id="headlineInput" placeholder="Gib hier deine Headline oder deinen Logonamen ein">
+        
+        <div class="checkboxes">
+            <!-- Dynamische Eigenschaften werden hier eingefügt -->
+        </div>
+        
+        <button id="findFontsBtn">Finde passende Fonts</button>
+
+        <div id="fontSuggestions"></div>
+
+        <div id="sublineSection" class="hidden">
+            <input type="text" id="sublineInput" placeholder="Subline eingeben">
+            <div id="sublineSuggestions"></div>
+        </div>
     </div>
-    <div id="sublineSection">
-      <input type="text" id="sublineInput" placeholder="Subline" />
-      <div id="sublineFontOptions"></div>
-    </div>
-    <button id="generateBtn">Generieren</button>
-    <div id="output">
-      <div id="headlineOutput"></div>
-      <div id="sublineOutput"></div>
-    </div>
-  </div>
-  <script src="main.js"></script>
 </body>
 </html>
