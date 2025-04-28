@@ -5,26 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Font Finder</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="main.js"></script>
 </head>
 <body>
-    <div id="loader" class="loader">Lade Fonts...</div>
-    <div id="app" class="hidden">
+    <div class="container">
         <h1>Font Finder</h1>
-        <input type="text" id="headlineInput" placeholder="Gib hier deine Headline oder deinen Logonamen ein">
-        
-        <div class="checkboxes">
-            <!-- Dynamische Eigenschaften werden hier eingefügt -->
-        </div>
-        
-        <button id="findFontsBtn">Finde passende Fonts</button>
 
-        <div id="fontSuggestions"></div>
+        <input type="text" id="headlineInput" placeholder="Gib deine Headline oder Logoname ein">
 
-        <div id="sublineSection" class="hidden">
-            <input type="text" id="sublineInput" placeholder="Subline eingeben">
-            <div id="sublineSuggestions"></div>
+        <div id="filters">
+            <!-- Hier kommen später deine 25 Filtereinstellungen -->
         </div>
+
+        <button id="searchButton">Fonts finden</button>
+
+        <div id="loadingSpinner" class="hidden">Lade Fonts...</div>
+
+        <div id="fontResults" class="font-grid"></div>
+
+        <button id="loadMoreButton" class="hidden">Weitere anzeigen</button>
     </div>
+
+    <script src="main.js"></script>
 </body>
 </html>
