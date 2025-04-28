@@ -1,69 +1,17 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Font Matcher Tool</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" async></script>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&family=Poppins:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <h1>Font Matcher Tool</h1>
-    <div class="input-section">
-      <label for="headline-text">Logo Text / Headline</label>
-      <input type="text" id="headline-text" placeholder="Gib deinen Text hier ein" />
-
-      <form id="filter-form">
-        <h3>Eigenschaften auswählen (max. 5):</h3>
-        <div class="properties">
-          <!-- Checkboxen für Eigenschaften -->
-          <label><input type="checkbox" name="property" value="Zeitlos"> Zeitlos</label>
-          <label><input type="checkbox" name="property" value="Modern"> Modern</label>
-          <label><input type="checkbox" name="property" value="Vertrauenswürdig"> Vertrauenswürdig</label>
-          <label><input type="checkbox" name="property" value="Innovativ"> Innovativ</label>
-          <label><input type="checkbox" name="property" value="Natürlich"> Natürlich</label>
-          <label><input type="checkbox" name="property" value="Freundlich"> Freundlich</label>
-          <label><input type="checkbox" name="property" value="Minimalistisch"> Minimalistisch</label>
-          <label><input type="checkbox" name="property" value="Verspielt"> Verspielt</label>
-          <label><input type="checkbox" name="property" value="Dynamisch"> Dynamisch</label>
-          <label><input type="checkbox" name="property" value="Bodenständig"> Bodenständig</label>
-          <label><input type="checkbox" name="property" value="Hochwertig"> Hochwertig</label>
-          <label><input type="checkbox" name="property" value="Ehrlich"> Ehrlich</label>
-          <label><input type="checkbox" name="property" value="Kreativ"> Kreativ</label>
-          <label><input type="checkbox" name="property" value="Selbstbewusst"> Selbstbewusst</label>
-          <label><input type="checkbox" name="property" value="Reduziert"> Reduziert</label>
-          <label><input type="checkbox" name="property" value="Charakterstark"> Charakterstark</label>
-          <label><input type="checkbox" name="property" value="Elegant"> Elegant</label>
-          <label><input type="checkbox" name="property" value="Nachhaltig"> Nachhaltig</label>
-          <label><input type="checkbox" name="property" value="Inspirierend"> Inspirierend</label>
-          <label><input type="checkbox" name="property" value="Mutig"> Mutig</label>
-          <label><input type="checkbox" name="property" value="Ruhig"> Ruhig</label>
-          <label><input type="checkbox" name="property" value="Erfrischend"> Erfrischend</label>
-          <label><input type="checkbox" name="property" value="Klar"> Klar</label>
-          <label><input type="checkbox" name="property" value="Energiegeladen"> Energiegeladen</label>
-          <label><input type="checkbox" name="property" value="Verlässlich"> Verlässlich</label>
-        </div>
-        <button type="button" id="apply-button">Filter anwenden</button>
-        <button type="button" id="reset-button">Zurücksetzen</button>
-      </form>
-
-      <div class="font-select">
-        <h3>Ausgewählte Schriftart:</h3>
-        <select id="font-select">
-          <!-- Die Schriftarten werden hier dynamisch geladen -->
-        </select>
-      </div>
-    </div>
-
-    <div class="output-section">
-      <h2>Vorschau:</h2>
-      <div id="text" class="text-preview">
-        Dein Text hier
-      </div>
-    </div>
+    <!-- Deine bestehenden Input-Elemente hier belassen -->
+    <div id="font-container" class="font-grid"></div>
   </div>
-
-  <script src="main.js"></script>
+  <script src="main.js" type="module"></script>
 </body>
 </html>
