@@ -1,133 +1,86 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const fonts = [
-    {
-      name: "Roboto",
-      properties: ["Modern", "Klar", "Verlässlich"],
-      description: "Roboto ist eine moderne und klare Schriftart, die für ihre Lesbarkeit bekannt ist."
-    },
-    {
-      name: "Lobster",
-      properties: ["Verspielt", "Kreativ", "Charakterstark"],
-      description: "Lobster verleiht Texten einen verspielten und charakterstarken Look."
-    },
-    {
-      name: "Open Sans",
-      properties: ["Zeitlos", "Vertrauenswürdig", "Minimalistisch"],
-      description: "Open Sans ist eine zeitlose Schriftart, die Vertrauen und Minimalismus ausstrahlt."
-    },
-    // Weitere Schriftarten hinzufügen...
-  ];
-
-  const maxProperties = 5;
-  const headlineInput = document.getElementById("headline-text");
-  const propertiesForm = document.getElementById("filter-form");
-  const resetButton = document.getElementById("reset-button");
-  const fontSelect = document.getElementById("font-select");
-  const textPreview = document.getElementById("text");
-  const propertiesCheckboxes = propertiesForm.querySelectorAll('input[name="property"]');
-  const fontSuggestionsContainer = document.createElement("div");
-  fontSuggestionsContainer.className = "font-suggestions";
-  document.querySelector(".input-section").appendChild(fontSuggestionsContainer);
-
-  // Funktion zum Laden von Google Fonts
-  function loadFont(fontName) {
-    WebFont.load({
-      google: {
-        families: [fontName]
-      },
-      active: function () {
-        textPreview.style.fontFamily = fontName;
-      }
-    });
+// Font-Datenbank
+const fonts = [
+  {
+    name: 'Montserrat',
+    traits: ['modern', 'selbstbewusst', 'geometrisch'],
+    category: 'sans-serif'
+  },
+  {
+    name: 'Playfair Display',
+    traits: ['elegant', 'hochwertig', 'charakterstark'],
+    category: 'serif'
+  },
+  {
+    name: 'Lato',
+    traits: ['freundlich', 'natürlich', 'vertrauenswürdig'],
+    category: 'sans-serif'
+  },
+  {
+    name: 'Roboto',
+    traits: ['innovativ', 'dynamisch', 'technisch'],
+    category: 'sans-serif'
+  },
+  {
+    name: 'Poppins',
+    traits: ['energiegeladen', 'modern', 'geometrisch'],
+    category: 'sans-serif'
+  },
+  {
+    name: 'Merriweather',
+    traits: ['zuverlässig', 'bodenständig', 'lesefreundlich'],
+    category: 'serif'
   }
+];
 
-  // Funktion zum Aktualisieren der Vorschau
-  function updatePreview() {
-    const selectedFont = fontSelect.value;
-    loadFont(selectedFont);
-    textPreview.textContent = headlineInput.value || "Dein Text hier";
-  }
+// Erklärungen
+const fontExplanations = {
+  'Montserrat': 'Geometrische Präzision für professionelle Wirkung',
+  'Playfair Display': 'Klassische Eleganz mit zeitgemäßer Lesbarkeit',
+  'Lato': 'Ausgewogene Rundungen schaffen Vertrauen',
+  'Roboto': 'Technisch präzise Formen für digitale Projekte',
+  'Poppins': 'Dynamische Geometrie mit hoher Flexibilität',
+  'Merriweather': 'Optimale Lesbarkeit für lange Texte'
+};
 
-  // Funktion zum Filtern der Schriftarten basierend auf ausgewählten Eigenschaften
-  function filterFonts() {
-    const selectedProperties = Array.from(propertiesCheckboxes)
-      .filter(checkbox => checkbox.checked)
-      .map(checkbox => checkbox.value);
-
-    // Schriftarten filtern
-    const matchingFonts = fonts.filter(font =>
-      selectedProperties.every(prop => font.properties.includes(prop))
-    );
-
-    // Vorschläge anzeigen
-    displayFontSuggestions(matchingFonts);
-
-    // Dropdown aktualisieren
-    updateFontSelect(matchingFonts);
-
-    // Vorschau aktualisieren
-    updatePreview();
-  }
-
-  // Funktion zum Anzeigen der Schriftvorschläge
-  function displayFontSuggestions(fonts) {
-    fontSuggestionsContainer.innerHTML = "";
-
-    fonts.forEach(font => {
-      const card = document.createElement("div");
-      card.className = "font-card";
-
-      const title = document.createElement("h4");
-      title.textContent = font.name;
-      card.appendChild(title);
-
-      const description = document.createElement("p");
-      description.textContent = font.description;
-      card.appendChild(description);
-
-      fontSuggestionsContainer.appendChild(card);
-    });
-  }
-
-  // Funktion zum Aktualisieren des Dropdown-Menüs
-  function updateFontSelect(fonts) {
-    fontSelect.innerHTML = "";
-
-    fonts.forEach(font => {
-      const option = document.createElement("option");
-      option.value = font.name;
-      option.textContent = font.name;
-      fontSelect.appendChild(option);
-    });
-  }
-
-  // Event-Listener für Checkboxen
-  propertiesCheckboxes.forEach(checkbox => {
-    checkbox.addEventListener("change", () => {
-      const checkedCount = Array.from(propertiesCheckboxes).filter(cb => cb.checked).length;
-      if (checkedCount > maxProperties) {
-        checkbox.checked = false;
-        alert(`Du kannst maximal ${maxProperties} Eigenschaften auswählen.`);
-      } else {
-        filterFonts();
-      }
-    });
-  });
-
-  // Event-Listener für Zurücksetzen-Button
-  resetButton.addEventListener("click", () => {
-    propertiesCheckboxes.forEach(checkbox => {
-      checkbox.checked = false;
-    });
-    fontSelect.innerHTML = "";
-    fontSuggestionsContainer.innerHTML = "";
-    textPreview.textContent = "Dein Text hier";
-    textPreview.style.fontFamily = "";
-  });
-
-  // Event-Listener für Texteingabe
-  headlineInput.addEventListener("input", updatePreview);
-
-  // Event-Listener für Schriftartauswahl
-  fontSelect.addEventListener("change", updatePreview);
+// Initialisierung
+document.addEventListener('DOMContentLoaded', () => {
+  // Hier deine bestehende Event-Listener für die Filter
+  // Beispiel-Trigger für Demo-Zwecke:
+  updateFontDisplay(['modern', 'professionell']);
 });
+
+function updateFontDisplay(selectedTraits) {
+  const container = document.getElementById('font-container');
+  container.innerHTML = '';
+
+  const filteredFonts = filterFonts(selectedTraits);
+  
+  filteredFonts.forEach(font => {
+    const card = document.createElement('div');
+    card.className = 'font-card';
+    card.innerHTML = `
+      <div class="font-preview" style="font-family: '${font.name}'">
+        ${font.name}<br>
+        "Design ist Harmonie"
+      </div>
+      <div class="font-explanation">
+        <h3>${font.name}</h3>
+        <p>${fontExplanations[font.name]}</p>
+        <ul>
+          ${font.traits.filter(t => selectedTraits.includes(t)).map(t => `<li>Passt zu: ${t}</li>`).join('')}
+        </ul>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function filterFonts(selectedTraits) {
+  return fonts.filter(font => 
+    selectedTraits.some(trait => font.traits.includes(trait))
+  ).sort((a, b) => {
+    const aMatches = a.traits.filter(t => selectedTraits.includes(t)).length;
+    const bMatches = b.traits.filter(t => selectedTraits.includes(t)).length;
+    return bMatches - aMatches;
+  });
+}
