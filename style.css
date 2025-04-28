@@ -1,4 +1,4 @@
-/* Basis-Reset */
+
 * {
   margin: 0;
   padding: 0;
@@ -6,57 +6,55 @@
 }
 
 body {
-  font-family: 'Lato', sans-serif;
-  line-height: 1.6;
-  padding: 2rem;
+  font-family: 'Roboto', sans-serif;
+  background-color: #ffffff;
   color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  text-align: center;
 }
 
-/* Font-Karten */
-.font-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
 }
 
-.font-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 1.5rem;
+input {
+  padding: 10px;
+  margin: 10px;
+  width: 80%;
+  font-size: 1rem;
 }
 
-.font-preview {
-  font-size: 1.5rem;
-  line-height: 1.6;
-  padding: 1rem;
-  background: #f8f9fa;
-  border-radius: 4px;
-  min-height: 120px;
+button {
+  padding: 10px 20px;
+  background-color: #fc634f;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-.font-explanation h3 {
-  margin-bottom: 0.5rem;
-  color: #2c3e50;
+button:hover {
+  background-color: #e05343;
 }
 
-.font-explanation ul {
-  padding-left: 1.2rem;
-  margin-top: 0.5rem;
-  color: #555;
+#fontOptions, #sublineSection {
+  margin-bottom: 20px;
 }
 
-@media (max-width: 768px) {
-  .font-card {
-    grid-template-columns: 1fr;
-  }
+#output {
+  margin-top: 30px;
+}
+
+#headlineOutput, #sublineOutput {
+  font-size: 2rem;
+  margin-top: 20px;
+  font-weight: bold;
 }

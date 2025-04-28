@@ -1,17 +1,33 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Font Matcher Tool</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Lato:wght@400;700&family=Playfair+Display:wght@400;700&family=Roboto:wght@400;700&family=Poppins:wght@400;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <title>Font Finder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <!-- Deine bestehenden Input-Elemente hier belassen -->
-    <div id="font-container" class="font-grid"></div>
+    <h1>Font Finder Tool</h1>
+    <input type="text" id="headlineInput" placeholder="Headline oder Logoname" />
+    <div id="fontOptions">
+      <label for="fontSelect">Wählen Sie eine Schriftart für die Headline:</label>
+      <select id="fontSelect">
+        <!-- Google Fonts Optionen werden hier dynamisch eingefügt -->
+      </select>
+    </div>
+    <div id="sublineSection">
+      <input type="text" id="sublineInput" placeholder="Subline" />
+      <div id="sublineFontOptions"></div>
+    </div>
+    <button id="generateBtn">Generieren</button>
+    <div id="output">
+      <div id="headlineOutput"></div>
+      <div id="sublineOutput"></div>
+    </div>
   </div>
-  <script src="main.js" type="module"></script>
+  <script src="main.js"></script>
 </body>
 </html>
