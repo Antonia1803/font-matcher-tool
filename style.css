@@ -18,7 +18,7 @@ input[type="text"] {
   width: 80%;
   padding: 10px;
   margin: 20px 0;
-  font-size: 1.2rem;
+  font-size: 2rem;
 }
 
 .attributes {
@@ -36,6 +36,7 @@ input[type="text"] {
   border-radius: 20px;
   cursor: pointer;
   user-select: none;
+  font-size: 1rem;
 }
 
 .attribute.selected {
@@ -52,7 +53,7 @@ input[type="text"] {
 .font-card {
   background: #f8f8f8;
   border: 1px solid #ddd;
-  padding: 20px;
+  padding: 30px;
   border-radius: 10px;
   transition: transform 0.3s;
   cursor: pointer;
@@ -63,7 +64,7 @@ input[type="text"] {
 }
 
 .font-preview {
-  font-size: 2rem;
+  font-size: 2.5rem; /* Größere Schrift */
   margin-bottom: 10px;
 }
 
@@ -95,4 +96,27 @@ button {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Detailansicht */
+.font-details {
+  margin-top: 30px;
+}
+
+#variantButtons {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.variant-button {
+  background: #fc634f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  font-size: 1rem;
+  cursor: pointer;
 }
