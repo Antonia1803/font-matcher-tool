@@ -1,65 +1,135 @@
-const API_KEY = "AIzaSyAsYiOrdnXJe_-D6GhXzbJNbXO6jDcqft8";
-const MAX_SELECTION = 4;
-const traits = [
-    "Zeitlos", "Modern", "Vertrauenswürdig", "Innovativ", "Natürlich", "Freundlich", "Minimalistisch", "Verspielt",
-    "Dynamisch", "Bodenständig", "Hochwertig", "Ehrlich", "Kreativ", "Selbstbewusst", "Reduziert", "Charakterstark",
-    "Elegant", "Nachhaltig", "Inspirierend", "Mutig", "Ruhig", "Erfrischend", "Klar", "Energiegeladen", "Verlässlich"
+// Beispiel-Daten: Schriftarten mit zugehörigen Eigenschaften und Beschreibungen
+const fonts = [
+  {
+    name: "Roboto",
+    properties: ["Modern", "Klar", "Verlässlich"],
+    description: "Roboto ist eine moderne und klare Schriftart, die für ihre Lesbarkeit bekannt ist."
+  },
+  {
+    name: "Lobster",
+    properties: ["Verspielt", "Kreativ", "Charakterstark"],
+    description: "Lobster verleiht Texten einen verspielten und charakterstarken Look."
+  },
+  {
+    name: "Open Sans",
+    properties: ["Zeitlos", "Vertrauenswürdig", "Minimalistisch"],
+    description: "Open Sans ist eine zeitlose Schriftart, die Vertrauen und Minimalismus ausstrahlt."
+  },
+  // Weitere Schriftarten hinzufügen...
 ];
 
-// Loader
-window.addEventListener('load', () => {
-    document.getElementById('loader').classList.add('hidden');
-    document.getElementById('app').classList.remove('hidden');
-});
+// Maximal erlaubte Eigenschaften
+const maxProperties = 5;
 
-// Erstelle Checkboxen
-const checkboxesDiv = document.querySelector('.checkboxes');
-traits.forEach(trait => {
-    const label = document.createElement('label');
-    label.innerHTML = `<input type="checkbox" value="${trait}"> ${trait}`;
-    checkboxesDiv.appendChild(label);
-});
+// DOM-Elemente
+const headlineInput = document.getElementById("headline-text");
+const propertiesForm = document.getElementById("filter-form");
+const resetButton = document.getElementById("reset-button");
+const fontSelect = document.getElementById("font-select");
+const textPreview = document.getElementById("text");
+const propertiesCheckboxes = propertiesForm.querySelectorAll('input[name="property"]');
+const fontSuggestionsContainer = document.createElement("div");
+fontSuggestionsContainer.className = "font-suggestions";
+document.querySelector(".input-section").appendChild(fontSuggestionsContainer);
 
-// Eventlistener für Button
-document.getElementById('findFontsBtn').addEventListener('click', async () => {
-    const selectedTraits = Array.from(document.querySelectorAll('.checkboxes input:checked')).map(cb => cb.value);
-    if (selectedTraits.length > MAX_SELECTION) {
-        alert("Bitte wähle maximal 4 Eigenschaften aus.");
-        return;
+// Funktion zum Laden von Google Fonts
+function loadFont(fontName) {
+  WebFont.load({
+    google: {
+      families: [fontName]
+    },
+    active: function() {
+      textPreview.style.fontFamily = fontName;
     }
-    const headline = document.getElementById('headlineInput').value;
-    if (!headline) {
-        alert("Bitte gib eine Headline oder einen Logonamen ein.");
-        return;
-    }
-    const fonts = await fetchGoogleFonts();
-    displayFontSuggestions(fonts.items.slice(0, 10), headline); // Testweise erste 10 Fonts
-});
-
-// Google Fonts API abrufen
-async function fetchGoogleFonts() {
-    const response = await fetch(`https://www.googleapis.com/webfonts/v1/webfonts?key=${API_KEY}`);
-    return await response.json();
+  });
 }
 
-// Fonts anzeigen
-function displayFontSuggestions(fonts, text) {
-    const fontDiv = document.getElementById('fontSuggestions');
-    fontDiv.innerHTML = "";
-    fonts.forEach(font => {
-        const fontLink = document.createElement('link');
-        fontLink.href = `https://fonts.googleapis.com/css2?family=${font.family.replace(/ /g, '+')}&display=swap`;
-        fontLink.rel = 'stylesheet';
-        document.head.appendChild(fontLink);
-
-        const div = document.createElement('div');
-        div.classList.add('font-preview');
-        div.style.fontFamily = `'${font.family}', sans-serif`;
-        div.innerHTML = `<strong>${font.family}:</strong><br><span style="font-size:2rem">${text}</span>`;
-        fontDiv.appendChild(div);
-    });
-
-    document.getElementById('sublineSection').classList.remove('hidden');
+// Funktion zum Aktualisieren der Vorschau
+function updatePreview() {
+  const selectedFont = fontSelect.value;
+  loadFont(selectedFont);
+  textPreview.textContent = headlineInput.value || "Dein Text hier";
 }
 
-// Hier könnte noch Subline Auswahl implementiert werden
+// Funktion zum Filtern der Schriftarten basierend auf ausgewählten Eigenschaften
+function filterFonts() {
+  const selectedProperties = Array.from(propertiesCheckboxes)
+    .filter(checkbox => checkbox.checked)
+    .map(checkbox => checkbox.value);
+
+  // Schriftarten filtern
+  const matchingFonts = fonts.filter(font =>
+    selectedProperties.every(prop => font.properties.includes(prop))
+  );
+
+  // Vorschläge anzeigen
+  displayFontSuggestions(matchingFonts);
+
+  // Dropdown aktualisieren
+  updateFontSelect(matchingFonts);
+
+  // Vorschau aktualisieren
+  updatePreview();
+}
+
+// Funktion zum Anzeigen der Schriftvorschläge
+function displayFontSuggestions(fonts) {
+  fontSuggestionsContainer.innerHTML = "";
+
+  fonts.forEach(font => {
+    const card = document.createElement("div");
+    card.className = "font-card";
+
+    const title = document.createElement("h4");
+    title.textContent = font.name;
+    card.appendChild(title);
+
+    const description = document.createElement("p");
+    description.textContent = font.description;
+    card.appendChild(description);
+
+    fontSuggestionsContainer.appendChild(card);
+  });
+}
+
+// Funktion zum Aktualisieren des Dropdown-Menüs
+function updateFontSelect(fonts) {
+  fontSelect.innerHTML = "";
+
+  fonts.forEach(font => {
+    const option = document.createElement("option");
+    option.value = font.name;
+    option.textContent = font.name;
+    fontSelect.appendChild(option);
+  });
+}
+
+// Event-Listener für Checkboxen
+propertiesCheckboxes.forEach(checkbox => {
+  checkbox.addEventListener("change", () => {
+    const checkedCount = Array.from(propertiesCheckboxes).filter(cb => cb.checked).length;
+    if (checkedCount > maxProperties) {
+      checkbox.checked = false;
+      alert(`Du kannst maximal ${maxProperties} Eigenschaften auswählen.`);
+    } else {
+      filterFonts();
+    }
+  });
+});
+
+// Event-Listener für Zurücksetzen-Button
+resetButton.addEventListener("click", () => {
+  propertiesCheckboxes.forEach(checkbox => {
+    checkbox.checked = false;
+  });
+  fontSelect.innerHTML = "";
+  fontSuggestionsContainer.innerHTML = "";
+  textPreview.textContent = "Dein Text hier";
+  textPreview.style.fontFamily = "";
+});
+
+// Event-Listener für Texteingabe
+headlineInput.addEventListener("input", updatePreview);
+
+// Event-Listener für Schriftartauswahl
+fontSelect.addEventListener("change", updatePreview);
