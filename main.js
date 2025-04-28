@@ -1,86 +1,96 @@
 const apiKey = "AIzaSyAsYiOrdnXJe_-D6GhXzbJNbXO6jDcqft8";
-const traits = [
-    "Zeitlos", "Modern", "Vertrauenswürdig", "Innovativ", "Natürlich",
-    "Freundlich", "Minimalistisch", "Verspielt", "Dynamisch", "Bodenständig",
-    "Hochwertig", "Ehrlich", "Kreativ", "Selbstbewusst", "Reduziert",
-    "Charakterstark", "Elegant", "Nachhaltig", "Inspirierend", "Mutig",
-    "Ruhig", "Erfrischend", "Klar", "Energiegeladen", "Verlässlich"
+const headlineInput = document.getElementById('headlineInput');
+const fontGrid = document.getElementById('fontGrid');
+const loadMoreBtn = document.getElementById('loadMoreBtn');
+const loader = document.getElementById('loader');
+const attributesContainer = document.getElementById('attributes');
+
+const attributes = [
+  "Zeitlos", "Modern", "Vertrauenswürdig", "Innovativ", "Natürlich",
+  "Freundlich", "Minimalistisch", "Verspielt", "Dynamisch", "Bodenständig",
+  "Hochwertig", "Ehrlich", "Kreativ", "Selbstbewusst", "Reduziert",
+  "Charakterstark", "Elegant", "Nachhaltig", "Inspirierend", "Mutig",
+  "Ruhig", "Erfrischend", "Klar", "Energiegeladen", "Verlässlich"
 ];
 
 let fonts = [];
 let displayedFonts = 0;
 const fontsPerLoad = 20;
 
-document.addEventListener('DOMContentLoaded', () => {
-    const traitsContainer = document.getElementById('traitsContainer');
-    traits.forEach(trait => {
-        const label = document.createElement('label');
-        label.innerHTML = `<input type="checkbox" value="${trait}">${trait}`;
-        traitsContainer.appendChild(label);
-    });
-
-    document.getElementById('findFontsBtn').addEventListener('click', findFonts);
-    document.getElementById('loadMoreBtn').addEventListener('click', showFonts);
+// Attribute Auswahl aufbauen
+attributes.forEach(attr => {
+  const div = document.createElement('div');
+  div.className = 'attribute';
+  div.innerText = attr;
+  div.onclick = () => {
+    div.classList.toggle('selected');
+    loadFonts();
+  };
+  attributesContainer.appendChild(div);
 });
 
-function findFonts() {
-    const selectedTraits = Array.from(document.querySelectorAll('#traitsContainer input:checked'))
-        .map(cb => cb.value)
-        .slice(0, 4);
-
-    if (selectedTraits.length === 0) {
-        alert("Bitte wähle mindestens 1 Eigenschaft aus.");
-        return;
-    }
-
-    document.getElementById('fontResults').innerHTML = '';
-    document.getElementById('loading').classList.remove('hidden');
-    fonts = [];
-    displayedFonts = 0;
-
-    fetch(`https://www.googleapis.com/webfonts/v1/webfonts?key=${apiKey}`)
-        .then(response => response.json())
-        .then(data => {
-            fonts = data.items.filter(font => font.category === "sans-serif" || font.category === "display");
-            showFonts();
-            document.getElementById('loading').classList.add('hidden');
-        })
-        .catch(error => {
-            console.error('Fehler beim Laden der Fonts:', error);
-            document.getElementById('loading').classList.add('hidden');
-        });
+// Fonts laden
+async function fetchFonts() {
+  loader.classList.remove('hidden');
+  const response = await fetch(`https://www.googleapis.com/webfonts/v1/webfonts?key=${apiKey}`);
+  const data = await response.json();
+  fonts = data.items;
+  loader.classList.add('hidden');
+  loadFonts();
 }
 
-function showFonts() {
-    const fontResults = document.getElementById('fontResults');
-    const headline = document.getElementById('headlineInput').value || 'Beispiel-Headline';
-    const subline = document.getElementById('sublineInput').value || 'Subline hier...';
+function loadFonts() {
+  fontGrid.innerHTML = "";
+  displayedFonts = 0;
+  showMoreFonts();
+}
 
-    const nextFonts = fonts.slice(displayedFonts, displayedFonts + fontsPerLoad);
+function showMoreFonts() {
+  loader.classList.remove('hidden');
+  
+  setTimeout(() => {
+    const selectedAttributes = Array.from(document.querySelectorAll('.attribute.selected')).map(attr => attr.innerText.toLowerCase());
+    let filteredFonts = fonts.filter(font => font.category !== 'handwriting' && font.category !== 'monospace');
 
-    nextFonts.forEach(font => {
-        const card = document.createElement('div');
-        card.className = 'font-card';
+    // Einfacher Filter (z.B. Modern => Sans-Serif etc.)
+    if (selectedAttributes.includes("modern")) {
+      filteredFonts = filteredFonts.filter(f => f.category === 'sans-serif');
+    }
+    if (selectedAttributes.includes("elegant")) {
+      filteredFonts = filteredFonts.filter(f => f.family.toLowerCase().includes('serif'));
+    }
 
-        const fontName = font.family.replace(/ /g, '+');
-        const link = document.createElement('link');
-        link.href = `https://fonts.googleapis.com/css2?family=${fontName}&display=swap`;
-        link.rel = "stylesheet";
-        document.head.appendChild(link);
+    const fontsToShow = filteredFonts.slice(displayedFonts, displayedFonts + fontsPerLoad);
+    fontsToShow.forEach(font => {
+      const fontCard = document.createElement('div');
+      fontCard.className = 'font-card';
+      fontCard.innerHTML = `
+        <div class="font-preview" style="font-family: '${font.family}', sans-serif;">
+          ${headlineInput.value || 'Dein Text'}
+        </div>
+        <div><strong>${font.family}</strong></div>
+        <small>Kategorie: ${font.category}</small>
+      `;
+      fontCard.onclick = () => selectFont(font.family);
+      fontGrid.appendChild(fontCard);
 
-        card.innerHTML = `
-            <div class="font-sample" style="font-family: '${font.family}', sans-serif;">${headline}</div>
-            <div class="font-sample" style="font-family: '${font.family}', sans-serif; font-size: 1.2rem;">${subline}</div>
-            <div class="font-info"><b>${font.family}</b> – perfekt für moderne & kreative Projekte</div>
-        `;
-        fontResults.appendChild(card);
+      const link = document.createElement('link');
+      link.href = `https://fonts.googleapis.com/css?family=${font.family.replace(/ /g, '+')}`;
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
     });
 
     displayedFonts += fontsPerLoad;
-
-    if (displayedFonts < fonts.length) {
-        document.getElementById('loadMoreBtn').classList.remove('hidden');
-    } else {
-        document.getElementById('loadMoreBtn').classList.add('hidden');
-    }
+    loader.classList.add('hidden');
+  }, 500);
 }
+
+function selectFont(fontFamily) {
+  headlineInput.style.fontFamily = `'${fontFamily}', sans-serif`;
+}
+
+loadMoreBtn.addEventListener('click', showMoreFonts);
+headlineInput.addEventListener('input', loadFonts);
+
+// Start
+fetchFonts();
