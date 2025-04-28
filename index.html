@@ -3,27 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Finder</title>
+    <title>Font Finder Tool</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
+    <header>
         <h1>Font Finder</h1>
+        <p>Finde die perfekte Schrift für dein Logo oder Projekt</p>
+    </header>
 
-        <input type="text" id="headlineInput" placeholder="Gib deine Headline oder Logoname ein">
+    <main>
+        <section class="input-section">
+            <input type="text" id="headlineInput" placeholder="Deine Headline hier eingeben...">
+            <input type="text" id="sublineInput" placeholder="Optional: Deine Subline hier eingeben...">
+        </section>
 
-        <div id="filters">
-            <!-- Hier kommen später deine 25 Filtereinstellungen -->
-        </div>
+        <section class="filter-section">
+            <h2>Wähle bis zu 4 Eigenschaften:</h2>
+            <div id="traitsContainer" class="traits-grid"></div>
+        </section>
 
-        <button id="searchButton">Fonts finden</button>
+        <button id="findFontsBtn">Fonts finden</button>
 
-        <div id="loadingSpinner" class="hidden">Lade Fonts...</div>
+        <div id="loading" class="loading hidden">Lade passende Fonts...</div>
 
-        <div id="fontResults" class="font-grid"></div>
+        <section id="fontResults" class="font-grid"></section>
 
-        <button id="loadMoreButton" class="hidden">Weitere anzeigen</button>
-    </div>
+        <button id="loadMoreBtn" class="hidden">Weitere anzeigen</button>
+    </main>
 
     <script src="main.js"></script>
 </body>
