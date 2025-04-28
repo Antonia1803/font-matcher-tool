@@ -55,6 +55,16 @@ h1, h2, h3 {
   cursor: pointer;
 }
 
-.properties input
-::contentReference[oaicite:4]{index=4}
+.properties input {
+  margin-right: 5px;
+}
+
+/* Buttons */
+button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border
+::contentReference[oaicite:0]{index=0}
  
