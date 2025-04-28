@@ -1,30 +1,68 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Font Finder</title>
-    <link rel="stylesheet" href="style.css">
-    <script defer src="main.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Font Matcher Tool</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
 </head>
 <body>
-    <div id="loader" class="loader">Lade Fonts...</div>
-    <div id="app" class="hidden">
-        <h1>Font Finder</h1>
-        <input type="text" id="headlineInput" placeholder="Gib hier deine Headline oder deinen Logonamen ein">
-        
-        <div class="checkboxes">
-            <!-- Dynamische Eigenschaften werden hier eingefügt -->
-        </div>
-        
-        <button id="findFontsBtn">Finde passende Fonts</button>
+  <div class="container">
+    <h1>Font Matcher Tool</h1>
+    <div class="input-section">
+      <label for="headline-text">Logo Text / Headline</label>
+      <input type="text" id="headline-text" placeholder="Gib deinen Text hier ein" />
 
-        <div id="fontSuggestions"></div>
-
-        <div id="sublineSection" class="hidden">
-            <input type="text" id="sublineInput" placeholder="Subline eingeben">
-            <div id="sublineSuggestions"></div>
+      <form id="filter-form">
+        <h3>Eigenschaften auswählen (max. 5):</h3>
+        <div class="properties">
+          <!-- Checkboxes für Eigenschaften -->
+          <label><input type="checkbox" name="property" value="Zeitlos"> Zeitlos</label>
+          <label><input type="checkbox" name="property" value="Modern"> Modern</label>
+          <label><input type="checkbox" name="property" value="Vertrauenswürdig"> Vertrauenswürdig</label>
+          <label><input type="checkbox" name="property" value="Innovativ"> Innovativ</label>
+          <label><input type="checkbox" name="property" value="Natürlich"> Natürlich</label>
+          <label><input type="checkbox" name="property" value="Freundlich"> Freundlich</label>
+          <label><input type="checkbox" name="property" value="Minimalistisch"> Minimalistisch</label>
+          <label><input type="checkbox" name="property" value="Verspielt"> Verspielt</label>
+          <label><input type="checkbox" name="property" value="Dynamisch"> Dynamisch</label>
+          <label><input type="checkbox" name="property" value="Bodenständig"> Bodenständig</label>
+          <label><input type="checkbox" name="property" value="Hochwertig"> Hochwertig</label>
+          <label><input type="checkbox" name="property" value="Ehrlich"> Ehrlich</label>
+          <label><input type="checkbox" name="property" value="Kreativ"> Kreativ</label>
+          <label><input type="checkbox" name="property" value="Selbstbewusst"> Selbstbewusst</label>
+          <label><input type="checkbox" name="property" value="Reduziert"> Reduziert</label>
+          <label><input type="checkbox" name="property" value="Charakterstark"> Charakterstark</label>
+          <label><input type="checkbox" name="property" value="Elegant"> Elegant</label>
+          <label><input type="checkbox" name="property" value="Nachhaltig"> Nachhaltig</label>
+          <label><input type="checkbox" name="property" value="Inspirierend"> Inspirierend</label>
+          <label><input type="checkbox" name="property" value="Mutig"> Mutig</label>
+          <label><input type="checkbox" name="property" value="Ruhig"> Ruhig</label>
+          <label><input type="checkbox" name="property" value="Erfrischend"> Erfrischend</label>
+          <label><input type="checkbox" name="property" value="Klar"> Klar</label>
+          <label><input type="checkbox" name="property" value="Energiegeladen"> Energiegeladen</label>
+          <label><input type="checkbox" name="property" value="Verlässlich"> Verlässlich</label>
         </div>
+        <button type="button" id="reset-button">Zurücksetzen</button>
+      </form>
+
+      <div class="font-select">
+        <h3>Ausgewählte Schriftart:</h3>
+        <select id="font-select">
+          <!-- Die Schriftarten werden hier dynamisch geladen -->
+        </select>
+      </div>
     </div>
+
+    <div class="output-section">
+      <h2>Vorschau:</h2>
+      <div id="text" class="text-preview">
+        Dein Text hier
+      </div>
+    </div>
+  </div>
+
+  <script src="main.js"></script>
 </body>
 </html>
