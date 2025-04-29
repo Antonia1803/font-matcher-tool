@@ -1,1 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Schriftart Detailansicht</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" async></script>
+</head>
+<body>
+  <div class="container">
+    <h1 id="font-name">Schriftart Name</h1>
+    <div>
+      <label for="font-weight">Schriftschnitt auswählen:</label>
+      <select id="font-weight">
+        <!-- Optionen werden dynamisch hinzugefügt -->
+      </select>
+    </div>
+    <div id="headline-preview" class="text-preview">
+      Deine Headline hier
+    </div>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const urlParams = new URLSearchParams(window.location.search);
+      const fontName = urlParams.get('font');
+      const fontWeights = urlParams.get('weights') ? urlParams.get('weights').split(',') : ['400'];
 
+      const fontNameElement = document.getElementById('font-name');
+      const fontWeightSelect = document.getElementById('font-weight');
+      const headlinePreview = document.getElementById('headline-preview');
+
+      fontNameElement.textContent = fontName;
+
+      // Optionen für Schriftschnitte hinzufügen
+      fontWeights.forEach(weight => {
+        const option = document.createElement('option');
+        option.value = weight;
+        option.textContent = `Gewicht ${weight}`;
+        fontWeightSelect.appendChild(option);
+      });
+
+      function loadFont(weight) {
+        WebFont.load({
+          google: {
+            families: [`${fontName}:${weight}`]
+          },
+          active: function () {
+            headlinePreview.style.fontFamily = fontName;
+            headlinePreview.style.fontWeight = weight;
+          }
+        });
+      }
+
+      // Initiale Schriftart laden
+      loadFont(fontWeights[0]);
+
+      // Event Listener für Schriftschnitt-Auswahl
+      fontWeightSelect.addEventListener('change', function () {
+        loadFont(this.value);
+      });
+    });
+  </script>
+</body>
+</html>
